@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class Moniteur extends Plongeur {
 
-    public int numeroDiplome; 
+    public int numeroDiplome;
     private ArrayList<Embauche> lesEmbauches;
 
     public Moniteur(String numeroINSEE, String nom, String prenom, String adresse, String telephone, LocalDate naissance, int numeroDiplome) {
@@ -47,7 +47,10 @@ public class Moniteur extends Plongeur {
         return lesEmbauches;
     }
 
-    public void terminerEmbauche(LocalDate fin) {
+    public void terminerEmbauche(LocalDate fin) throws Exception {
+        if(lesEmbauches.get(lesEmbauches.size() - 1).estTerminee()){
+            throw new Exception("Embauche déjà terminée");
+        }
         lesEmbauches.get(lesEmbauches.size() - 1).terminer(fin);
     }
 
@@ -55,6 +58,5 @@ public class Moniteur extends Plongeur {
     public String toString() {
         return "Moniteur{" + "numeroDiplome=" + numeroDiplome + '}';
     }
-    
-    
+
 }

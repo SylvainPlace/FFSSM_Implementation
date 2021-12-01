@@ -5,10 +5,7 @@ package FFSSM;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.HashSet;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,14 +25,6 @@ public class FFSSMTest {
     public FFSSMTest() {
     }
 
-    @BeforeAll
-    public static void setUpClass() {
-    }
-
-    @AfterAll
-    public static void tearDownClass() {
-    }
-
     @BeforeEach
     public void setUp() {
         date = LocalDate.of(2020, Month.MARCH, 1);
@@ -48,20 +37,16 @@ public class FFSSMTest {
         m3.ajouterLicence("49L", date.minusMonths(10));
     }
 
-    @AfterEach
-    public void tearDown() {
-    }
-
     /**
      * Test of plongeesNonConformes method, of class Club.
      */
     @Test
     public void testPlongeesNonConformes() {
         HashSet<Plongee> plongees = new HashSet<>();
-        plongees.add(p);
         p.ajouteParticipant(m2);
         p.ajouteParticipant(m3);
         c.organisePlongee(p);
+        plongees.add(p);
         assertEquals(plongees, c.plongeesNonConformes(), "Les plongées non conformes doivent s'afficher");
         m2.ajouterLicence("50L", date.minusMonths(10));
         plongees.remove(p);
@@ -97,12 +82,19 @@ public class FFSSMTest {
      */
     @Test
     public void testEmployeurActuel() {
-        date = LocalDate.of(2020, Month.MARCH, 1);
-        m1 = new Moniteur("147E", "Jeanne", "Jean", "8 rue de la ferme", "06 67 89 01 23", date, 1);
-        c = new Club(m1, "Les Dents de la mer", "05 67 78 12 34");
+        try {
+            m1.terminerEmbauche(LocalDate.now());
+            fail();
+        } catch (Exception ex) {
+            //  doit  renvoyer une erreur
+        }
         m1.nouvelleEmbauche(c, date);
         assertEquals(c, m1.employeurActuel().get(), "L'employeur n'est pas bon");
-        m1.terminerEmbauche(LocalDate.now());
+        try {
+            m1.terminerEmbauche(LocalDate.now());
+        } catch (Exception ex) {
+            fail();// ne doit pas renvoyer d'erreur
+        }
         assertTrue(m1.employeurActuel().isEmpty(), "L'employeur n'est pas bon");
     }
 

@@ -12,7 +12,7 @@ public class Plongeur extends Personne {
         this(numeroINSEE, nom, prenom, adresse, telephone, naissance);
         this.niveau = niveau;
     }
-    
+
     public Plongeur(String numeroINSEE, String nom, String prenom, String adresse, String telephone, LocalDate naissance) {
         super(numeroINSEE, nom, prenom, adresse, telephone, naissance);
         lesLicences = new ArrayList<>();
@@ -22,7 +22,7 @@ public class Plongeur extends Personne {
         lesLicences.add(new Licence(this, numero, delivrance));
     }
 
-    public Licence DerniereLicence(){
+    public Licence DerniereLicence() {
         if (lesLicences.isEmpty()) {
             return null;
         }
