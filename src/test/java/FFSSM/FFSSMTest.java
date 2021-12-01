@@ -57,7 +57,6 @@ public class FFSSMTest {
      */
     @Test
     public void testPlongeesNonConformes() {
-
         HashSet<Plongee> plongees = new HashSet<>();
         plongees.add(p);
         p.ajouteParticipant(m2);
