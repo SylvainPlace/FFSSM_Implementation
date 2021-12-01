@@ -33,8 +33,8 @@ public class FFSSMTest {
         m3 = new Moniteur("147G", "Edouardo", "Edouard", "8 rue de la ferme", "06 67 89 01 25", date, 3);
         p = new Plongee(new Site("Plage de l'amour", "Plage très prisée par les amoureux"), m1, date, 50, 4);
         c = new Club(m1, "Les Dents de la mer", "05 67 78 12 34");
-        m1.ajouterLicence("47L", date.minusMonths(10));
-        m3.ajouterLicence("49L", date.minusMonths(10));
+        m1.ajouterLicence("47L", date.minusMonths(10),c);
+        m3.ajouterLicence("49L", date.minusMonths(10),c);
     }
 
     /**
@@ -48,7 +48,7 @@ public class FFSSMTest {
         c.organisePlongee(p);
         plongees.add(p);
         assertEquals(plongees, c.plongeesNonConformes(), "Les plongées non conformes doivent s'afficher");
-        m2.ajouterLicence("50L", date.minusMonths(10));
+        m2.ajouterLicence("50L", date.minusMonths(10),c);
         plongees.remove(p);
         assertEquals(plongees, c.plongeesNonConformes(), "Aucune plongee ne doit s'afficher");
     }
@@ -58,11 +58,11 @@ public class FFSSMTest {
      */
     @Test
     public void testEstConforme() {
-        m2.ajouterLicence("48L", date.minusMonths(14));
+        m2.ajouterLicence("48L", date.minusMonths(14),c);
         p.ajouteParticipant(m2);
         p.ajouteParticipant(m3);
         assertFalse(p.estConforme(), "La plongée doit être conforme");
-        m2.ajouterLicence("50L", date.minusMonths(10));
+        m2.ajouterLicence("50L", date.minusMonths(10),c);
         assertTrue(p.estConforme(), "La plongée doit être conforme");
 
     }

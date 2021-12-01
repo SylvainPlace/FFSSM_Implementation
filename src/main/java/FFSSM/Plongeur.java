@@ -18,8 +18,8 @@ public class Plongeur extends Personne {
         lesLicences = new ArrayList<>();
     }
 
-    public void ajouterLicence(String numero, LocalDate delivrance) {
-        lesLicences.add(new Licence(this, numero, delivrance));
+    public void ajouterLicence(String numero, LocalDate delivrance, Club club) {
+        lesLicences.add(new Licence(this, numero, delivrance, club));
     }
 
     public Licence DerniereLicence() {

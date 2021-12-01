@@ -23,12 +23,6 @@ public class Licence {
         this.club = club;
     }
 
-    public Licence(Personne possesseur, String numero, LocalDate delivrance) {
-        this.possesseur = possesseur;
-        this.numero = numero;
-        this.delivrance = delivrance;
-    }
-
     public Personne getPossesseur() {
         return possesseur;
     }
